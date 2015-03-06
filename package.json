@@ -1,0 +1,32 @@
+{
+  "name": "react-tokenizer",
+  "description": "A React.js component for tokenizing user input",
+  "version": "0.1.0",
+  "author": "Chen Zihui <hello@chenzihui.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chenzihui/react-tokenizer"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "jest-cli": "^0.4.0",
+    "react-tools": "^0.12.2",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.4.0"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/support/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
+}
