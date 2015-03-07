@@ -5,10 +5,31 @@ var React     = require('react'),
 
     Tokenizer;
 
+const KEYS = {
+  TAB: 9,
+  COMMA: 188,
+  ENTER: 13
+};
+
+const SEPERATORS = [KEYS.TAB, KEYS.COMMA, KEYS.ENTER];
+
+function _findTextNode(nodes) {
+  var i;
+
+  for (i = 0; i < nodes.length; i++) {
+    if (nodes[i].nodeType === 3) {
+      return nodes[i];
+    }
+  }
+
+  return null;
+}
+
 Tokenizer = React.createClass({
 
   propTypes: {
-    tokens: React.PropTypes.array
+    tokens: React.PropTypes.array,
+    tokenize: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -26,8 +47,29 @@ Tokenizer = React.createClass({
 
     return (
       <div className="rt-tokenizer"
-        contentEditable="true">{items}</div>
+        contentEditable="true"
+        onKeyDown={this._handleKeyDown}>{items}</div>
     );
+  },
+
+  _handleKeyDown: function(evt) {
+    var node     = this.getDOMNode(),
+        children = node.childNodes,
+
+        textNode, textContent;
+
+    if (SEPERATORS.indexOf(evt.which) !== -1) {
+      evt.preventDefault();
+
+      if (children.length > 0) {
+        textNode = _findTextNode(children);
+
+        if (textNode && textNode.textContent.trim()) {
+          node.removeChild(textNode);
+          this.props.tokenize(textNode.textContent.trim());
+        }
+      }
+    }
   }
 
 });
