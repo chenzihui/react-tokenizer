@@ -25,6 +25,18 @@ function _findTextNode(nodes) {
   return null;
 }
 
+function _setCaretAtEnd(node) {
+  var range, selection;
+
+  range = document.createRange();
+  range.selectNodeContents(node);
+  range.collapse(false);
+
+  selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+}
+
 Tokenizer = React.createClass({
 
   propTypes: {
@@ -38,6 +50,18 @@ Tokenizer = React.createClass({
 
   componentDidMount: function() {
     this.getDOMNode().focus();
+  },
+
+  componentDidUpdate: function() {
+    var node     = this.getDOMNode(),
+        children = node.childNodes,
+        lastNode = children[children.length - 1];
+
+    if (this.props.tokens.length > 0) {
+      node.innerHTML += '&nbsp;';
+
+      _setCaretAtEnd(node);
+    }
   },
 
   render: function() {
