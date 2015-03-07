@@ -15,6 +15,10 @@ Tokenizer = React.createClass({
     return { tokens: [] };
   },
 
+  componentDidMount: function() {
+    this.getDOMNode().focus();
+  },
+
   render: function() {
     var items = this.props.tokens.map(function(token, index) {
       return <TokenCell key={index} textContent={token} />;
