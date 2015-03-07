@@ -1,0 +1,44 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.rt-tokenizer {
+  border: 4px solid #ddd;
+  border-radius: 4px;
+  height: 370px;
+  padding: 5px;
+  width: 600px;
+}
+
+.rt-tokenizer:focus {
+  outline: none;
+}
+
+.rt-cell {
+  background-color: #ddd;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  color: #444;
+  display: inline-block;
+  margin: 0 3px 3px 0;
+  padding: 4px 8px;
+}
