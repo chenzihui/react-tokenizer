@@ -6,24 +6,13 @@ var React     = require('react'),
     Tokenizer;
 
 const KEYS = {
+  BACKSPACE: 8,
   TAB: 9,
   COMMA: 188,
   ENTER: 13
 };
 
 const SEPERATORS = [KEYS.TAB, KEYS.COMMA, KEYS.ENTER];
-
-function _findTextNode(nodes) {
-  var i;
-
-  for (i = 0; i < nodes.length; i++) {
-    if (nodes[i].nodeType === 3) {
-      return nodes[i];
-    }
-  }
-
-  return null;
-}
 
 function _setCaretAtEnd(node) {
   var range, selection;
@@ -41,7 +30,9 @@ Tokenizer = React.createClass({
 
   propTypes: {
     tokens: React.PropTypes.array,
-    tokenize: React.PropTypes.func
+
+    tokenize: React.PropTypes.func,
+    removeToken: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -58,9 +49,12 @@ Tokenizer = React.createClass({
         lastNode = children[children.length - 1];
 
     if (this.props.tokens.length > 0) {
-      node.innerHTML += '&nbsp;';
-
+      if (lastNode.nodeType !== 3 || lastNode.textContent.trim()) {
+        node.innerHTML += '&nbsp;';
+      }
       _setCaretAtEnd(node);
+    } else {
+      node.innerHTML = '';
     }
   },
 
@@ -80,17 +74,33 @@ Tokenizer = React.createClass({
     var node     = this.getDOMNode(),
         children = node.childNodes,
 
-        textNode, textContent;
+        lastNode, textContent;
 
     if (SEPERATORS.indexOf(evt.which) !== -1) {
       evt.preventDefault();
 
       if (children.length > 0) {
-        textNode = _findTextNode(children);
+        lastNode    = children[children.length - 1];
+        textContent = lastNode.textContent.trim();
 
-        if (textNode && textNode.textContent.trim()) {
-          node.removeChild(textNode);
-          this.props.tokenize(textNode.textContent.trim());
+        if (lastNode.nodeType === 3 && textContent) {
+          node.removeChild(lastNode);
+          this.props.tokenize(textContent);
+        }
+      }
+    } else if (evt.which === KEYS.BACKSPACE) {
+      var anchorNode, prevSibling;
+
+      if (children.length > 0) {
+        lastNode = children[children.length - 1];
+
+        if (!lastNode.textContent.trim()) {
+          evt.preventDefault();
+
+          anchorNode = window.getSelection().anchorNode;
+          prevSibling = anchorNode.previousSibling;
+
+          this.props.removeToken(prevSibling.textContent.trim());
         }
       }
     }
