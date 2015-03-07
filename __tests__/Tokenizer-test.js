@@ -24,4 +24,14 @@ describe('Tokenizer', function() {
 
     expect(elements.length).toEqual(4);
   });
+
+  it('should not display any tokens if no data is passed in', function() {
+    var tokenizer = TestUtils.renderIntoDocument(<Tokenizer />),
+        elements;
+
+    elements = TestUtils.scryRenderedComponentsWithType(
+      tokenizer, TokenCell);
+
+    expect(elements.length).toEqual(0);
+  });
 });
