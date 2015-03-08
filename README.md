@@ -19,5 +19,4 @@ Note that Jest tests are breaking on Node v0.12.0 and IO.js v1.5.0
 - Cross browser compatibility
 - Typing in between tokens
 - Remove tokens other than the last token
-- Handle paste events
 - Better test suite

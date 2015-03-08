@@ -66,7 +66,8 @@ Tokenizer = React.createClass({
     return (
       <div className="rt-tokenizer"
         contentEditable="true"
-        onKeyDown={this._handleKeyDown}>{items}</div>
+        onKeyDown={this._handleKeyDown}
+        onPaste={this._handlePaste}>{items}</div>
     );
   },
 
@@ -104,6 +105,16 @@ Tokenizer = React.createClass({
         }
       }
     }
+  },
+
+  _handlePaste: function(evt) {
+    evt.preventDefault();
+
+    var clipboard = evt.clipboardData,
+        data      = clipboard.getData('text/plain'),
+        tokens    = data.split("\n");
+
+    this.props.tokenize(tokens);
   }
 
 });

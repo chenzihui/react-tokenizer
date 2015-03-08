@@ -23,10 +23,15 @@ App = React.createClass({
     );
   },
 
-  _tokenize: function(token) {
+  _tokenize: function(data) {
     var tokens = this.state.tokens;
 
-    tokens.push(token);
+    if (Array.isArray(data)) {
+      tokens = tokens.concat(data)
+    } else {
+      tokens.push(data);
+    }
+
     this.setState({ tokens: tokens });
   },
 

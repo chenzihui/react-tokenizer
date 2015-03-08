@@ -24,10 +24,15 @@ App = React.createClass({
     );
   },
 
-  _tokenize: function _tokenize(token) {
+  _tokenize: function _tokenize(data) {
     var tokens = this.state.tokens;
 
-    tokens.push(token);
+    if (Array.isArray(data)) {
+      tokens = tokens.concat(data);
+    } else {
+      tokens.push(data);
+    }
+
     this.setState({ tokens: tokens });
   },
 
@@ -18435,7 +18440,8 @@ Tokenizer = React.createClass({
       "div",
       { className: "rt-tokenizer",
         contentEditable: "true",
-        onKeyDown: this._handleKeyDown },
+        onKeyDown: this._handleKeyDown,
+        onPaste: this._handlePaste },
       items
     );
   },
@@ -18474,6 +18480,16 @@ Tokenizer = React.createClass({
         }
       }
     }
+  },
+
+  _handlePaste: function _handlePaste(evt) {
+    evt.preventDefault();
+
+    var clipboard = evt.clipboardData,
+        data = clipboard.getData("text/plain"),
+        tokens = data.split("\n");
+
+    this.props.tokenize(tokens);
   }
 
 });
