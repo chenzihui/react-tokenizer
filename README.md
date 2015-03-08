@@ -12,7 +12,10 @@ Example use cases include:
 Run `npm install` followed by `gulp webserver`. Open your browser and visit
 `http://localhost:8080`.
 
-Note that Jest tests are breaking on Node v0.12.0 and IO.js v1.5.0
+## Tests
+
+Jest tests are breaking on Node v0.12.0 and IO.js v1.5.0, so I have not written
+a comprehensive test suite.
 
 ## TODO
 
