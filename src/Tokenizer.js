@@ -12,18 +12,6 @@ const KEYS = {
 
 const SEPERATORS = [KEYS.TAB, KEYS.COMMA, KEYS.ENTER];
 
-function _setCaretAtEnd(node) {
-  let range, selection;
-
-  range = document.createRange();
-  range.selectNodeContents(node);
-  range.collapse(false);
-
-  selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
-}
-
 export default React.createClass({
 
   propTypes: {

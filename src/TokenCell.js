@@ -14,8 +14,7 @@ export default React.createClass({
     if (!textContent || !textContent.trim()) { return null; }
 
     return (
-      <div className="rt-cell"
-        contentEditable="false">{textContent.trim()}</div>
+      <div className="rt-cell">{textContent.trim()}</div>
     );
   }
 
