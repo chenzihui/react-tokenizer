@@ -24,13 +24,24 @@ body {
 .rt-tokenizer {
   border: 4px solid #ddd;
   border-radius: 4px;
+  display: flex;
   height: 370px;
   padding: 5px;
   width: 600px;
 }
 
-.rt-tokenizer:focus {
-  outline: none;
+.rt-tokenizer__user-input {
+  border: none;
+  display: inline-block;
+  flex-grow: 1;
+  font-size: 16px;
+  height: 28px;
+  padding: 4px;
+  resize: none;
+}
+
+.rt-tokenizer__user-input:focus {
+  outline: 0;
 }
 
 .rt-cell {
@@ -39,6 +50,7 @@ body {
   border-radius: 3px;
   color: #444;
   display: inline-block;
+  height: 28px;
   margin: 0 3px 3px 0;
   padding: 4px 8px;
 }
