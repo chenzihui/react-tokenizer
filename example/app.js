@@ -1,12 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./example/js/app.js":[function(require,module,exports){
 "use strict";
 
-var React = require("react"),
-    Tokenizer = require("../../src/Tokenizer"),
-    TokenCell = require("../../src/TokenCell"),
-    App;
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-App = React.createClass({
+var React = _interopRequire(require("react"));
+
+var Tokenizer = _interopRequire(require("../../src/Tokenizer"));
+
+var TokenCell = _interopRequire(require("../../src/TokenCell"));
+
+var App = React.createClass({
   displayName: "App",
 
   getInitialState: function getInitialState() {
@@ -18341,10 +18344,11 @@ module.exports = require('./lib/React');
 },{"./lib/React":"/Users/iuhiz/projects/react-tokenizer/node_modules/react/lib/React.js"}],"/Users/iuhiz/projects/react-tokenizer/src/TokenCell.js":[function(require,module,exports){
 "use strict";
 
-var React = require("react"),
-    TokenCell;
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
-TokenCell = React.createClass({
+var React = _interopRequire(require("react"));
+
+module.exports = React.createClass({
   displayName: "TokenCell",
 
   propTypes: {
@@ -18368,14 +18372,14 @@ TokenCell = React.createClass({
 
 });
 
-module.exports = TokenCell;
-
 },{"react":"/Users/iuhiz/projects/react-tokenizer/node_modules/react/react.js"}],"/Users/iuhiz/projects/react-tokenizer/src/Tokenizer.js":[function(require,module,exports){
 "use strict";
 
-var React = require("react"),
-    TokenCell = require("./TokenCell"),
-    Tokenizer;
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
+var React = _interopRequire(require("react"));
+
+var TokenCell = _interopRequire(require("./TokenCell"));
 
 var KEYS = {
   BACKSPACE: 8,
@@ -18387,7 +18391,8 @@ var KEYS = {
 var SEPERATORS = [KEYS.TAB, KEYS.COMMA, KEYS.ENTER];
 
 function _setCaretAtEnd(node) {
-  var range, selection;
+  var range = undefined,
+      selection = undefined;
 
   range = document.createRange();
   range.selectNodeContents(node);
@@ -18398,7 +18403,7 @@ function _setCaretAtEnd(node) {
   selection.addRange(range);
 }
 
-Tokenizer = React.createClass({
+module.exports = React.createClass({
   displayName: "Tokenizer",
 
   propTypes: {
@@ -18449,8 +18454,8 @@ Tokenizer = React.createClass({
   _handleKeyDown: function _handleKeyDown(evt) {
     var node = this.getDOMNode(),
         children = node.childNodes,
-        lastNode,
-        textContent;
+        lastNode = undefined,
+        textContent = undefined;
 
     if (SEPERATORS.indexOf(evt.which) !== -1) {
       evt.preventDefault();
@@ -18465,7 +18470,8 @@ Tokenizer = React.createClass({
         }
       }
     } else if (evt.which === KEYS.BACKSPACE) {
-      var anchorNode, prevSibling;
+      var anchorNode = undefined,
+          prevSibling = undefined;
 
       if (children.length > 0) {
         lastNode = children[children.length - 1];
@@ -18493,7 +18499,5 @@ Tokenizer = React.createClass({
   }
 
 });
-
-module.exports = Tokenizer;
 
 },{"./TokenCell":"/Users/iuhiz/projects/react-tokenizer/src/TokenCell.js","react":"/Users/iuhiz/projects/react-tokenizer/node_modules/react/react.js"}]},{},["./example/js/app.js"]);

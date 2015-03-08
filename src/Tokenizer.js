@@ -1,9 +1,7 @@
 'use strict';
 
-var React     = require('react'),
-    TokenCell = require('./TokenCell'),
-
-    Tokenizer;
+import React from 'react';
+import TokenCell from './TokenCell';
 
 const KEYS = {
   BACKSPACE: 8,
@@ -15,7 +13,7 @@ const KEYS = {
 const SEPERATORS = [KEYS.TAB, KEYS.COMMA, KEYS.ENTER];
 
 function _setCaretAtEnd(node) {
-  var range, selection;
+  let range, selection;
 
   range = document.createRange();
   range.selectNodeContents(node);
@@ -26,7 +24,7 @@ function _setCaretAtEnd(node) {
   selection.addRange(range);
 }
 
-Tokenizer = React.createClass({
+export default React.createClass({
 
   propTypes: {
     tokens: React.PropTypes.array,
@@ -35,16 +33,16 @@ Tokenizer = React.createClass({
     removeToken: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return { tokens: [] };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.getDOMNode().focus();
   },
 
-  componentDidUpdate: function() {
-    var node     = this.getDOMNode(),
+  componentDidUpdate() {
+    let node     = this.getDOMNode(),
         children = node.childNodes,
         lastNode = children[children.length - 1];
 
@@ -58,8 +56,8 @@ Tokenizer = React.createClass({
     }
   },
 
-  render: function() {
-    var items = this.props.tokens.map(function(token, index) {
+  render() {
+    let items = this.props.tokens.map(function(token, index) {
       return <TokenCell key={index} textContent={token} />;
     });
 
@@ -71,8 +69,8 @@ Tokenizer = React.createClass({
     );
   },
 
-  _handleKeyDown: function(evt) {
-    var node     = this.getDOMNode(),
+  _handleKeyDown(evt) {
+    let node     = this.getDOMNode(),
         children = node.childNodes,
 
         lastNode, textContent;
@@ -90,7 +88,7 @@ Tokenizer = React.createClass({
         }
       }
     } else if (evt.which === KEYS.BACKSPACE) {
-      var anchorNode, prevSibling;
+      let anchorNode, prevSibling;
 
       if (children.length > 0) {
         lastNode = children[children.length - 1];
@@ -107,10 +105,10 @@ Tokenizer = React.createClass({
     }
   },
 
-  _handlePaste: function(evt) {
+  _handlePaste(evt) {
     evt.preventDefault();
 
-    var clipboard = evt.clipboardData,
+    let clipboard = evt.clipboardData,
         data      = clipboard.getData('text/plain'),
         tokens    = data.split("\n");
 
@@ -118,5 +116,3 @@ Tokenizer = React.createClass({
   }
 
 });
-
-module.exports = Tokenizer;

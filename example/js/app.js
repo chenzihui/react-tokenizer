@@ -1,18 +1,16 @@
 'use strict';
 
-var React     = require('react'),
-    Tokenizer = require('../../src/Tokenizer'),
-    TokenCell = require('../../src/TokenCell'),
+import React from 'react';
+import Tokenizer from '../../src/Tokenizer';
+import TokenCell from '../../src/TokenCell';
 
-    App;
+let App = React.createClass({
 
-App = React.createClass({
-
-  getInitialState: function() {
+  getInitialState() {
     return { tokens: [] }
   },
 
-  render: function() {
+  render() {
     return (
       <section className="app">
         <Tokenizer
@@ -23,8 +21,8 @@ App = React.createClass({
     );
   },
 
-  _tokenize: function(data) {
-    var tokens = this.state.tokens;
+  _tokenize(data) {
+    let tokens = this.state.tokens;
 
     if (Array.isArray(data)) {
       tokens = tokens.concat(data)
@@ -35,8 +33,8 @@ App = React.createClass({
     this.setState({ tokens: tokens });
   },
 
-  _removeToken: function(token) {
-    var tokens = this.state.tokens,
+  _removeToken(token) {
+    let tokens = this.state.tokens,
         index  = tokens.indexOf(token);
 
     if (index !== -1) {

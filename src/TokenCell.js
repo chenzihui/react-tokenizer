@@ -1,17 +1,15 @@
 'use strict';
 
-var React = require('react'),
+import React from 'react';
 
-    TokenCell;
-
-TokenCell = React.createClass({
+export default React.createClass({
 
   propTypes: {
     textContent: React.PropTypes.string
   },
 
-  render: function() {
-    var textContent = this.props.textContent;
+  render() {
+    let textContent = this.props.textContent;
 
     if (!textContent || !textContent.trim()) { return null; }
 
@@ -22,5 +20,3 @@ TokenCell = React.createClass({
   }
 
 });
-
-module.exports = TokenCell;
