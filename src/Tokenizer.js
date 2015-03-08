@@ -29,9 +29,15 @@ export default React.createClass({
     this.refs.tokenInput.getDOMNode().focus();
   },
 
+  componentDidUpdate() {
+    this.refs.tokenInput.getDOMNode().focus();
+  },
+
   render() {
-    let tokens = this.props.tokens.map(function(token, index) {
-      return <TokenCell key={index} textContent={token} />;
+    let self   = this,
+        tokens = self.props.tokens.map(function(token, index) {
+      return <TokenCell key={index} textContent={token}
+        removeToken={self.props.removeToken}/>;
     });
 
     return (
@@ -63,11 +69,13 @@ export default React.createClass({
 
       let parent = this.getDOMNode(),
           cells  = parent.querySelectorAll('.rt-cell'),
-          lastChild;
+          lastChild, textContent;
 
       if (cells.length > 0) {
         lastChild = cells[cells.length - 1];
-        this.props.removeToken(lastChild.textContent);
+        textContent = lastChild.querySelector('.rt-cell__content').textContent;
+
+        this.props.removeToken(textContent);
       }
     }
   },

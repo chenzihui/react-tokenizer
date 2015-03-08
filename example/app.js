@@ -18364,10 +18364,30 @@ module.exports = React.createClass({
 
     return React.createElement(
       "div",
-      { className: "rt-cell",
-        contentEditable: "false" },
-      textContent.trim()
+      { className: "rt-cell" },
+      React.createElement(
+        "p",
+        { className: "rt-cell__content" },
+        textContent.trim()
+      ),
+      React.createElement(
+        "span",
+        { className: "rt-cell__delete",
+          onClick: this._handleClick },
+        "x"
+      )
     );
+  },
+
+  _handleClick: function _handleClick(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    var cell = this.getDOMNode(),
+        textContent = undefined;
+
+    textContent = cell.querySelector(".rt-cell__content").textContent;
+    this.props.removeToken(textContent);
   }
 
 });
@@ -18390,19 +18410,6 @@ var KEYS = {
 
 var SEPERATORS = [KEYS.TAB, KEYS.COMMA, KEYS.ENTER];
 
-function _setCaretAtEnd(node) {
-  var range = undefined,
-      selection = undefined;
-
-  range = document.createRange();
-  range.selectNodeContents(node);
-  range.collapse(false);
-
-  selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
-}
-
 module.exports = React.createClass({
   displayName: "Tokenizer",
 
@@ -18421,9 +18428,15 @@ module.exports = React.createClass({
     this.refs.tokenInput.getDOMNode().focus();
   },
 
+  componentDidUpdate: function componentDidUpdate() {
+    this.refs.tokenInput.getDOMNode().focus();
+  },
+
   render: function render() {
-    var tokens = this.props.tokens.map(function (token, index) {
-      return React.createElement(TokenCell, { key: index, textContent: token });
+    var self = this,
+        tokens = self.props.tokens.map(function (token, index) {
+      return React.createElement(TokenCell, { key: index, textContent: token,
+        removeToken: self.props.removeToken });
     });
 
     return React.createElement(
@@ -18456,11 +18469,14 @@ module.exports = React.createClass({
 
       var _parent = this.getDOMNode(),
           cells = _parent.querySelectorAll(".rt-cell"),
-          lastChild = undefined;
+          lastChild = undefined,
+          textContent = undefined;
 
       if (cells.length > 0) {
         lastChild = cells[cells.length - 1];
-        this.props.removeToken(lastChild.textContent);
+        textContent = lastChild.querySelector(".rt-cell__content").textContent;
+
+        this.props.removeToken(textContent);
       }
     }
   },
