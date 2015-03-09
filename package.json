@@ -3,6 +3,7 @@
   "description": "A React.js component for tokenizing user input",
   "version": "0.1.0",
   "author": "Chen Zihui <hello@chenzihui.com>",
+  "main": "src/Tokenizer.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/chenzihui/react-tokenizer"
@@ -10,7 +11,7 @@
   "scripts": {
     "test": "jest"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^0.12.2"
   },
   "devDependencies": {
