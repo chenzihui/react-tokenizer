@@ -1,7 +1,3 @@
-/** @jsx React.DOM */
-
-'use strict';
-
 jest.dontMock('../src/TokenCell');
 
 var React     = require('react/addons'),
@@ -17,7 +13,7 @@ describe('TokenCell', function() {
     );
 
     element = TestUtils.findRenderedDOMComponentWithClass(
-      tokenCell, 'rt-cell');
+      tokenCell, 'rt-cell__content');
 
     expect(element.getDOMNode().textContent).toEqual('Testing');
   });

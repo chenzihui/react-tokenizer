@@ -1,7 +1,3 @@
-/** @jsx React.DOM */
-
-'use strict';
-
 jest.dontMock('../src/Tokenizer');
 jest.dontMock('../src/TokenCell');
 

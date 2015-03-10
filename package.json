@@ -15,6 +15,7 @@
     "react": "^0.12.2"
   },
   "devDependencies": {
+    "babel-jest": "^4.0.0",
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "del": "^1.1.1",
@@ -29,9 +30,11 @@
     "watchify": "^2.4.0"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/support/preprocessor.js",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
-    ]
+    ],
+    "testFileExtensions": ["es6", "js"],
+    "moduleFileExtensions": ["js", "json", "es6"]
   }
 }
