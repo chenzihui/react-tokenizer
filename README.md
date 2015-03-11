@@ -14,12 +14,10 @@ Run `npm install` followed by `gulp webserver`. Open your browser and visit
 
 ## Tests
 
-Jest tests are breaking on Node v0.12.0 and IO.js v1.5.0, so I have not written
-a comprehensive test suite.
+Tests are breaking on Node v0.12.0 and IO.js v1.5.0. To run the tests, you will
+have to switch to v0.10.x
 
 ## TODO
 
 - Cross browser compatibility
-- Typing in between tokens
 - Remove tokens other than the last token
-- Better test suite

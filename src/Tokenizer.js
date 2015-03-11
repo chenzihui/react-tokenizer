@@ -25,6 +25,10 @@ export default React.createClass({
     return { tokens: [] };
   },
 
+  getInitialState() {
+    return { userInput: '' };
+  },
+
   componentDidMount() {
     this.refs.tokenInput.getDOMNode().focus();
   },
@@ -47,25 +51,30 @@ export default React.createClass({
         <textarea
           className="rt-tokenizer__user-input"
           ref="tokenInput"
+          value={this.state.userInput}
           onKeyDown={this._handleKeyDown}
-          onPaste={this._handlePaste}></textarea>
+          onPaste={this._handlePaste}
+          onChange={this._handleChange}></textarea>
       </div>
     );
   },
 
+  _handleChange(evt) {
+    this.setState({ userInput: evt.target.value });
+  },
+
   _handleKeyDown(evt) {
-    let userInput = this.refs.tokenInput.getDOMNode(),
-        token     = userInput.value;
+    let userInput = this.state.userInput;
 
     if (SEPERATORS.indexOf(evt.which) !== -1) {
       evt.preventDefault();
 
-      if (token.trim()) {
-        this.props.tokenize(token);
-        userInput.value = '';
+      if (userInput.trim()) {
+        this.props.tokenize(userInput);
+        this.setState({ userInput: '' });
       }
     } else if (evt.which === KEYS.BACKSPACE) {
-      if (token.trim()) { return; }
+      if (userInput.trim()) { return; }
 
       let parent = this.getDOMNode(),
           cells  = parent.querySelectorAll('.rt-cell'),

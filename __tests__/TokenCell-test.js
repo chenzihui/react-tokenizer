@@ -25,4 +25,20 @@ describe('TokenCell', function() {
       TestUtils.findRenderedDOMComponentWithClass(tokenCell, 'rt-cell');
     }).toThrow();
   });
+
+  it('should remove itself when the x is clicked', function() {
+    var removeToken, tokenCell, deleteBtn;
+
+    removeToken = jest.genMockFunction();
+
+    tokenCell   = TestUtils.renderIntoDocument(
+          <TokenCell textContent="Hello" removeToken={removeToken} />);
+
+    deleteBtn = TestUtils.findRenderedDOMComponentWithClass(
+      tokenCell, 'rt-cell__delete');
+
+    TestUtils.Simulate.click(deleteBtn);
+
+    expect(removeToken).toBeCalledWith('Hello');
+  })
 });
