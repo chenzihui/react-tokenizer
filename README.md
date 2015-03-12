@@ -1,23 +1,91 @@
-# What is this?
+React Tokenizer
+====================
 
-A React.js component that parses user input in a ContentEditable element and
-displays them as individual tokens.
+A React.js component that parses user input and displays them as individual
+tokens.
 
 Example use cases include:
 - Entering a list of email addresses
 - Tagging
 
-## To run the example
+Installation
+--------------------
+```sh
+npm install react-tokenizer
+```
+
+This library is written with CommonJS modules. You'll need to be using
+Browserify or Webpack to consume it like any other modules from npm.
+
+To run the example
+--------------------
 
 Run `npm install` followed by `gulp webserver`. Open your browser and visit
 `http://localhost:8080`.
 
-## Tests
+Tests
+--------------------
 
-Tests are breaking on Node v0.12.0 and IO.js v1.5.0. To run the tests, you will
-have to switch to v0.10.x
+To run the tests `npm test`.
 
-## TODO
+Note that tests are breaking on Node v0.12.0 and IO.js v1.5.0. To run the tests,
+you will have to switch to v0.10.x
+
+This is a [known issue with Jest](https://github.com/facebook/jest/issues/267).
+
+How does it work?
+--------------------
+
+```js
+var App = React.createClass({
+    getInitialState: function() {
+        return { tokens: [] };
+    },
+
+    render: function() {
+        return (
+          <section className="app">
+            <Tokenizer
+              tokens={this.state.tokens}
+              tokenize={this._tokenize}
+              removeToken={this._removeToken} />
+          </section>
+        );
+    },
+
+    _tokenize: function(data) {
+        // Logic to tokenize user input
+    },
+
+    _removeToken: function(token) {
+        // Logic to remove a token
+    }
+});
+```
+
+The `<Tokenizer />` component takes in 3 propTypes i.e. `tokens`, `tokenize`
+and `removeToken`.
+
+`tokens` is basically an array of strings which will be rendered as individual
+cells with a [x] that removes itself upon clicking.
+
+`tokenize` is the function that is called whenever one of the key seperators is
+pressed while the input has focus.
+
+For now, the seperators are Tab, Comma and Enter.
+
+`removeToken` will be fired whenever the input has focus, but there is no value
+in it. The text content of the very last token will be sent as arguments.
+
+Paste Events
+--------------------
+
+Right now, if user input is pasted in, the Tokenizer simply splits them by
+newlines and sends an array of strings to `tokenize`.
+
+TODO
+--------------------
 
 - Cross browser compatibility
-- Remove tokens other than the last token
+- Custom seperator keys
+- Easier way to style the elements

@@ -8,6 +8,8 @@
     "type": "git",
     "url": "https://github.com/chenzihui/react-tokenizer"
   },
+  "homepage": "https://github.com/chenzihui/react-tokenizer",
+  "bugs": "https://github.com/chenzihui/react-tokenizer/issues",
   "scripts": {
     "test": "jest"
   },
@@ -43,5 +45,18 @@
       "json",
       "es6"
     ]
-  }
+  },
+  "license": "MIT",
+  "tags": [
+    "react",
+    "tokenizer"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "tokenizer",
+    "tokens",
+    "input",
+    "textarea"
+  ]
 }
