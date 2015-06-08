@@ -27,16 +27,6 @@ gulp.task('clean:example', function(done) {
   return del(['example/app.js'], done);
 });
 
-gulp.task('compile', ['clean:dist'], function() {
-  var b = _setupBrowserify('./src/Tokenizer.js');
-  b.exclude('react');
-
-  return b.bundle()
-    .pipe(plumber())
-    .pipe(source('Tokenizer.js'))
-    .pipe(gulp.dest('./dist/'));
-});
-
 gulp.task('example:dev', ['clean:example'], function() {
   var b = _setupBrowserify('./example/js/app.js'),
       w = watchify(b);
