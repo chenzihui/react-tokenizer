@@ -15,19 +15,17 @@ body {
 }
 
 .app {
-  display: flex;
   height: 100%;
-  align-items: center;
-  justify-content: center;
+  width: 600px;
+  margin: 0 auto;
 }
 
 .rt-tokenizer {
   border: 4px solid #ddd;
-  border-radius: 4px;
-  display: flex;
-  height: 370px;
+  border-radius: 3px;
+  display: block;
   padding: 5px;
-  width: 600px;
+  width: 100%;
 }
 
 .rt-tokenizer__user-input {
@@ -40,6 +38,13 @@ body {
   resize: none;
 }
 
+.rt-tokenizer__user-input > input,
+.rt-tokenizer__user-input > input:focus {
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+}
+
 .rt-tokenizer__user-input:focus {
   outline: 0;
 }
@@ -47,10 +52,9 @@ body {
 .rt-cell {
   background-color: #ddd;
   border: 1px solid #bbb;
-  border-radius: 6px;
+  border-radius: 3px;
   color: #444;
   display: inline-block;
-  height: 28px;
   margin: 0 3px 3px 0;
   padding: 4px 8px;
 }

@@ -44,8 +44,8 @@ describe('Tokenizer', function() {
       tokenizer = TestUtils.renderIntoDocument(
         <Tokenizer tokenize={tokenize} />);
 
-      textarea = TestUtils.findRenderedDOMComponentWithClass(
-        tokenizer, 'rt-tokenizer__user-input');
+      textarea = TestUtils.findRenderedDOMComponentWithTag(
+        tokenizer, 'input');
     });
 
     it('should tokenize user input after ENTER is pressed', function() {
@@ -96,8 +96,8 @@ describe('Tokenizer', function() {
       tokenizer = TestUtils.renderIntoDocument(
         <Tokenizer tokens={tokens} removeToken={handleDelete} />);
 
-      textarea = TestUtils.findRenderedDOMComponentWithClass(
-        tokenizer, 'rt-tokenizer__user-input');
+      textarea = TestUtils.findRenderedDOMComponentWithTag(
+        tokenizer, 'input');
     });
 
     it('should remove the latest token by pressing BACKSPACE', function() {

@@ -17,7 +17,7 @@ export default React.createClass({
       <div className="rt-cell">
         <p className="rt-cell__content">{textContent.trim()}</p>
         <span className="rt-cell__delete"
-          onClick={this._handleClick}>x</span>
+          onClick={this._handleClick}>&times;</span>
       </div>
     );
   },
