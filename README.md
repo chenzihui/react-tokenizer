@@ -28,11 +28,6 @@ Tests
 
 To run the tests `npm test`.
 
-Note that tests are breaking on Node v0.12.0 and IO.js v1.5.0. To run the tests,
-you will have to switch to v0.10.x
-
-This is a [known issue with Jest](https://github.com/facebook/jest/issues/267).
-
 How does it work?
 --------------------
 
