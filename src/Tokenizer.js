@@ -20,7 +20,8 @@ export default React.createClass({
     tokens: React.PropTypes.array,
 
     tokenize: React.PropTypes.func,
-    removeToken: React.PropTypes.func
+    removeToken: React.PropTypes.func,
+    tokenCellRenderer: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -40,10 +41,15 @@ export default React.createClass({
   },
 
   render() {
-    let self   = this,
-        tokens = self.props.tokens.map(function(token, index) {
-      return <TokenCell key={index} textContent={token}
-        removeToken={self.props.removeToken}/>;
+    let self = this;
+
+    let tokens = self.props.tokens.map(function(token, index) {
+      if (self.props.tokenCellRenderer) {
+        return self.props.tokenCellRenderer(token, index);
+      }
+      else {
+        return <TokenCell key={index} textContent={token} removeToken={self.props.removeToken}/>;
+      }
     });
 
     return (

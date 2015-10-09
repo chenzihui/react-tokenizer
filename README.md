@@ -72,6 +72,30 @@ For now, the seperators are Tab, Comma and Enter.
 `removeToken` will be fired whenever the input has focus, but there is no value
 in it. The text content of the very last token will be sent as arguments.
 
+Custom Token Cell Rendering
+--------------------
+
+You can further customize the UI and behavior of a `TokenCell` by providing your own custom renderer function to `Tokenizer` via the `tokenCellRenderer` property.
+
+```js
+// in render function
+<Tokenizer
+  tokens={this.state.tokens}
+  tokenize={this._tokenize}
+  removeToken={this._removeToken}
+  tokenCellRenderer={this._customTokenCellRenderer} />
+
+// in your page
+_customTokenCellRenderer(token, index) {
+  return (
+    <div className="custom-cell" key={index}>
+      HELLO {token}!
+    </div>
+  );
+}
+```
+
+
 Paste Events
 --------------------
 
@@ -83,4 +107,3 @@ TODO
 
 - Cross browser compatibility
 - Custom seperator keys
-- Easier way to style the elements
