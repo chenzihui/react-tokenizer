@@ -6,14 +6,16 @@ var gulp       = require('gulp'),
     browserify = require('browserify'),
     watchify   = require('watchify'),
     babelify   = require('babelify'),
-    del        = require('del');
+    del        = require('del'),
+    babel      = require("gulp-babel");
 
 function _setupBrowserify(path, debug) {
   var b = browserify({
     entries: [path],
     transform: [babelify],
     debug: debug,
-    cache: {}, packageCache: {}, fullPaths: true
+    cache: {},
+    packageCache: {}
   });
 
   return b;
@@ -52,4 +54,11 @@ gulp.task('webserver', ['example:dev'], function() {
     .pipe(webserver({
       port: 8080
     }));
+});
+
+// build lib
+gulp.task("build:lib", function () {
+  return gulp.src("src/**/*.js")
+    .pipe(babel())
+    .pipe(gulp.dest("./lib/"));
 });
