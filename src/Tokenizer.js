@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import AutosizeInput from 'react-input-autosize';
+
 import TokenCell from './TokenCell';
 
 const KEYS = {
@@ -18,7 +20,8 @@ export default React.createClass({
     tokens: React.PropTypes.array,
 
     tokenize: React.PropTypes.func,
-    removeToken: React.PropTypes.func
+    removeToken: React.PropTypes.func,
+    tokenCellRenderer: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -30,31 +33,37 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this.refs.tokenInput.getDOMNode().focus();
+    this._handleFocusInputField();
   },
 
   componentDidUpdate() {
-    this.refs.tokenInput.getDOMNode().focus();
+    this._handleFocusInputField();
   },
 
   render() {
-    let self   = this,
-        tokens = self.props.tokens.map(function(token, index) {
-      return <TokenCell key={index} textContent={token}
-        removeToken={self.props.removeToken}/>;
+    let self = this;
+
+    let tokens = self.props.tokens.map(function(token, index) {
+      if (self.props.tokenCellRenderer) {
+        return self.props.tokenCellRenderer(token, index);
+      }
+      else {
+        return <TokenCell key={index} textContent={token} removeToken={self.props.removeToken}/>;
+      }
     });
 
     return (
-      <div className="rt-tokenizer">
+      <div className="rt-tokenizer" onClick={this._handleFocusInputField}>
         {tokens}
-
-        <textarea
-          className="rt-tokenizer__user-input"
+        <AutosizeInput
+          type="text"
           ref="tokenInput"
+          className="rt-tokenizer__user-input"
           value={this.state.userInput}
           onKeyDown={this._handleKeyDown}
           onPaste={this._handlePaste}
-          onChange={this._handleChange}></textarea>
+          onChange={this._handleChange}
+        />
       </div>
     );
   },
@@ -97,6 +106,10 @@ export default React.createClass({
         tokens    = data.split("\n");
 
     this.props.tokenize(tokens);
+  },
+
+  _handleFocusInputField() {
+    React.findDOMNode(this.refs.tokenInput).getElementsByTagName('input')[0].focus();
   }
 
 });

@@ -1,8 +1,12 @@
 'use strict';
 
 import React from 'react';
+
 import Tokenizer from '../../src/Tokenizer';
 import TokenCell from '../../src/TokenCell';
+
+import SimpleExample from './SimpleExample';
+import CustomTokenCellRendererExample from './CustomTokenCellRendererExample';
 
 let App = React.createClass({
 
@@ -13,37 +17,21 @@ let App = React.createClass({
   render() {
     return (
       <section className="app">
-        <Tokenizer
-          tokens={this.state.tokens}
-          tokenize={this._tokenize}
-          removeToken={this._removeToken} />
+        <h1>react-tokenizer</h1>
+        <p>Try the following: </p>
+        <ul>
+          <li>Enter in text, followed by the 'enter', 'tab', or 'comma' keys</li>
+          <li>Delete tokens using the 'backspace' key</li>
+          <li>Paste a list of items delimited by line breaks</li>
+          <li>Input the string "magic-input"</li>
+        </ul>
+
+        <SimpleExample />
+        <CustomTokenCellRendererExample />
+
       </section>
     );
-  },
-
-  _tokenize(data) {
-    let tokens = this.state.tokens;
-
-    if (Array.isArray(data)) {
-      tokens = tokens.concat(data)
-    } else {
-      tokens.push(data);
-    }
-
-    this.setState({ tokens: tokens });
-  },
-
-  _removeToken(token) {
-    let tokens = this.state.tokens,
-        index  = tokens.indexOf(token);
-
-    if (index !== -1) {
-      tokens.splice(index, 1);
-    }
-
-    this.setState({ tokens: tokens });
   }
-
 });
 
 React.render(<App />, document.body);
