@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default React.createClass({
 
@@ -26,7 +27,7 @@ export default React.createClass({
     evt.preventDefault();
     evt.stopPropagation();
 
-    let cell = this.getDOMNode(),
+    let cell = ReactDOM.findDOMNode(this),
         textContent;
 
     textContent = cell.querySelector('.rt-cell__content').textContent;

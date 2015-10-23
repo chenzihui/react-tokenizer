@@ -1,10 +1,11 @@
 jest.dontMock('../src/Tokenizer');
 jest.dontMock('../src/TokenCell');
 
-var React     = require('react/addons'),
+var React     = require('react'),
+    ReactDOM  = require('react-dom'),
     Tokenizer = require('../src/Tokenizer'),
     TokenCell = require('../src/TokenCell'),
-    TestUtils = React.addons.TestUtils;
+    TestUtils = require('react-addons-test-utils');
 
 describe('Tokenizer', function() {
   it('should display a list of tokens', function() {
@@ -52,9 +53,9 @@ describe('Tokenizer', function() {
       const ENTER_KEY = 13;
 
       TestUtils.Simulate.change(
-        textarea.getDOMNode(), { target: { value: 'Hello' } });
+        ReactDOM.findDOMNode(textarea), { target: { value: 'Hello' } });
       TestUtils.Simulate.keyDown(
-        textarea.getDOMNode(), { which: ENTER_KEY });
+        ReactDOM.findDOMNode(textarea), { which: ENTER_KEY });
 
       expect(token).toEqual('Hello');
     });
@@ -63,9 +64,9 @@ describe('Tokenizer', function() {
       const TAB_KEY = 9;
 
       TestUtils.Simulate.change(
-        textarea.getDOMNode(), { target: { value: 'Hello' } });
+        ReactDOM.findDOMNode(textarea), { target: { value: 'Hello' } });
       TestUtils.Simulate.keyDown(
-        textarea.getDOMNode(), { which: TAB_KEY });
+        ReactDOM.findDOMNode(textarea), { which: TAB_KEY });
 
       expect(token).toEqual('Hello');
     });
@@ -74,9 +75,9 @@ describe('Tokenizer', function() {
       const COMMA_KEY = 188;
 
       TestUtils.Simulate.change(
-        textarea.getDOMNode(), { target: { value: 'Hello' } });
+        ReactDOM.findDOMNode(textarea), { target: { value: 'Hello' } });
       TestUtils.Simulate.keyDown(
-        textarea.getDOMNode(), { which: COMMA_KEY });
+        ReactDOM.findDOMNode(textarea), { which: COMMA_KEY });
 
       expect(token).toEqual('Hello');
     });
@@ -104,7 +105,7 @@ describe('Tokenizer', function() {
       const BACKSPACE = 8;
 
       TestUtils.Simulate.keyDown(
-        textarea.getDOMNode(), { which: BACKSPACE });
+        ReactDOM.findDOMNode(textarea), { which: BACKSPACE });
 
       expect(tokens.length).toEqual(1);
       expect(tokens[0]).toEqual('Hello');

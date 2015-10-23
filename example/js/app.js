@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Tokenizer from '../../src/Tokenizer';
 import TokenCell from '../../src/TokenCell';
 
@@ -46,4 +47,4 @@ let App = React.createClass({
 
 });
 
-React.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById('app'));

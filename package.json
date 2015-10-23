@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "react": "^0.13.3"
+    "react": "^0.14.0"
   },
   "devDependencies": {
     "babel-jest": "^4.0.0",
@@ -27,7 +27,8 @@
     "gulp-uglify": "^1.1.0",
     "gulp-util": "^3.0.4",
     "gulp-webserver": "^0.9.0",
-    "jest-cli": "^0.5.10",
+    "jest-cli": "^0.6.0",
+    "react-addons-test-utils": "^0.14.0",
     "react-tools": "^0.13.3",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.4.0"
@@ -35,7 +36,10 @@
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils"
     ],
     "testFileExtensions": [
       "es6",
