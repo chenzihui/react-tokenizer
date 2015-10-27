@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import TokenCell from './TokenCell';
 
 const KEYS = {
@@ -30,11 +31,11 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this.refs.tokenInput.getDOMNode().focus();
+    this.refs.tokenInput.focus();
   },
 
   componentDidUpdate() {
-    this.refs.tokenInput.getDOMNode().focus();
+    this.refs.tokenInput.focus();
   },
 
   render() {
@@ -76,7 +77,7 @@ export default React.createClass({
     } else if (evt.which === KEYS.BACKSPACE) {
       if (userInput.trim()) { return; }
 
-      let parent = this.getDOMNode(),
+      let parent = ReactDOM.findDOMNode(this),
           cells  = parent.querySelectorAll('.rt-cell'),
           lastChild, textContent;
 

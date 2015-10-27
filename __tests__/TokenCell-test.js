@@ -1,8 +1,9 @@
 jest.dontMock('../src/TokenCell');
 
-var React     = require('react/addons'),
+var React     = require('react'),
+    ReactDOM  = require('react-dom'),
     TokenCell = require('../src/TokenCell'),
-    TestUtils = React.addons.TestUtils;
+    TestUtils = require('react-addons-test-utils');
 
 describe('TokenCell', function() {
   it('should render an element with text in it', function() {
@@ -15,7 +16,7 @@ describe('TokenCell', function() {
     element = TestUtils.findRenderedDOMComponentWithClass(
       tokenCell, 'rt-cell__content');
 
-    expect(element.getDOMNode().textContent).toEqual('Testing');
+    expect(ReactDOM.findDOMNode(element).textContent).toEqual('Testing');
   });
 
   it('should not render an element if no data is passed', function() {
