@@ -19095,14 +19095,6 @@ module.exports = React.createClass({
     return { userInput: "" };
   },
 
-  componentDidMount: function componentDidMount() {
-    this.refs.tokenInput.focus();
-  },
-
-  componentDidUpdate: function componentDidUpdate() {
-    this.refs.tokenInput.focus();
-  },
-
   render: function render() {
     var self = this,
         tokens = self.props.tokens.map(function (token, index) {
