@@ -30,14 +30,6 @@ export default React.createClass({
     return { userInput: '' };
   },
 
-  componentDidMount() {
-    this.refs.tokenInput.focus();
-  },
-
-  componentDidUpdate() {
-    this.refs.tokenInput.focus();
-  },
-
   render() {
     let self   = this,
         tokens = self.props.tokens.map(function(token, index) {
