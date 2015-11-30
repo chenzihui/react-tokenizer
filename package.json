@@ -1,7 +1,7 @@
 {
   "name": "react-tokenizer",
   "description": "A React.js component for tokenizing user input",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Chen Zihui <hello@chenzihui.com>",
   "main": "lib/Tokenizer.js",
   "repository": {
